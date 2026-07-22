@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Format, validate, minify, copy, and download JSON instantly with a fast, private JSON formatter that runs entirely in your browser."
+    />
+    <meta name="theme-color" content="#f6f8fb" />
+    <title>JSON Forge - Free Online JSON Formatter &amp; Validator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#formatter">Skip to formatter</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="nav-shell">
+        <a class="brand" href="#top" aria-label="JSON Forge home">
+          <span class="brand-mark" aria-hidden="true">{ }</span>
+          <span>JSON<span>Forge</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Main menu">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Change color theme">
+            <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.9 13.1A8 8 0 1 1 10.9 3.1a6 6 0 0 0 10 10Z"/></svg>
+          </button>
+          <a class="button button-small button-dark" href="#formatter">Open formatter</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> Free developer utility</div>
+          <h1 id="hero-title">Free online JSON formatter <em>&amp; validator</em></h1>
+          <p>Turn unreadable JSON into clean, validated data in seconds. Fast, private, and built for the way developers work.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#formatter">Format JSON free
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 14 0M13 6l6 6-6 6"/></svg>
+            </a>
+            <span class="privacy-note">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+              Your JSON never leaves this browser
+            </span>
+          </div>
+        </div>
+        <div class="hero-proof" aria-label="Tool benefits">
+          <div><strong>100%</strong><span>Browser-based</span></div>
+          <div><strong>0</strong><span>JSON uploads</span></div>
+          <div><strong>Free</strong><span>Unlimited transformations</span></div>
+        </div>
+      </section>
+
+      <section class="tool-section" id="formatter" aria-labelledby="formatter-title">
+        <div class="tool-heading">
+          <div>
+            <p class="section-kicker">Developer workspace</p>
+            <h2 id="formatter-title">Format and validate JSON</h2>
+          </div>
+          <div class="status-badge is-ready" id="validationStatus" role="status" aria-live="polite">
+            <span class="status-dot"></span>
+            <span id="statusText">Ready</span>
+          </div>
+        </div>
+
+        <div class="tool-shell">
+          <div class="toolbar" role="toolbar" aria-label="JSON actions">
+            <div class="toolbar-primary">
+              <button class="button button-primary" id="formatBtn" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+                Format
+              </button>
+              <button class="button button-secondary" id="minifyBtn" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 3-5 5 5 5M16 3l5 5-5 5M8 21h8"/></svg>
+                Minify
+              </button>
+              <button class="button button-secondary" id="validateBtn" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                Validate
+              </button>
+            </div>
+            <div class="toolbar-secondary">
+              <input id="fileInput" type="file" accept=".json,application/json" hidden />
+              <button class="button button-quiet" id="uploadBtn" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg>
+                Upload
+              </button>
+              <button class="button button-quiet" id="clearBtn" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"/></svg>
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div class="error-message" id="errorMessage" role="alert" hidden>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
+            <div><strong>Invalid JSON</strong><span id="errorText"></span></div>
+          </div>
+
+          <div class="editor-grid">
+            <section class="editor-panel" aria-labelledby="input-label">
+              <header class="panel-header">
+                <div class="panel-label"><span class="file-dot"></span><span id="input-label">Input</span><small>JSON</small></div>
+                <span class="panel-meta" id="inputMeta">0 lines</span>
+              </header>
+              <div class="code-editor input-editor">
+                <div class="line-numbers" id="inputLineNumbers" aria-hidden="true">1</div>
+                <textarea
+                  id="jsonInput"
+                  aria-label="Raw JSON input"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  autocomplete="off"
+                  wrap="off"
+                  placeholder="Paste your JSON here..."
+                ></textarea>
+              </div>
+            </section>
+
+            <section class="editor-panel" aria-labelledby="output-label">
+              <header class="panel-header">
+                <div class="panel-label"><span class="file-dot output-dot"></span><span id="output-label">Output</span><small>JSON</small></div>
+                <div class="panel-actions">
+                  <span class="panel-meta" id="outputMeta">Waiting for input</span>
+                  <button class="icon-button panel-icon" id="copyBtn" type="button" aria-label="Copy output" title="Copy output">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  </button>
+                  <button class="icon-button panel-icon" id="downloadBtn" type="button" aria-label="Download JSON" title="Download JSON">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                  </button>
+                </div>
+              </header>
+              <div class="code-editor output-editor" id="outputEditor">
+                <div class="line-numbers" id="outputLineNumbers" aria-hidden="true">1</div>
+                <pre id="jsonOutput" tabindex="0" aria-label="Formatted JSON output"><span class="empty-state">Your formatted JSON will appear here.</span></pre>
+              </div>
+            </section>
+          </div>
+
+          <footer class="tool-footer">
+            <span><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to format</span>
+            <span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg> JSON processing runs locally. Your input is never uploaded.</span>
+          </footer>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <aside class="ad-break ad-wide" data-adviverse-unit="primary" data-media="(min-width: 760px)" aria-label="Advertisement" hidden>
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-slot ad-slot-wide" data-adviverse-slot></div>
+      </aside>
+
+      <section class="section" id="features" aria-labelledby="features-title">
+        <div class="section-intro">
+          <p class="section-kicker">Everything you need</p>
+          <h2 id="features-title">A focused JSON toolkit, without the clutter</h2>
+          <p>Useful on the first click, dependable on the thousandth. JSON Forge keeps common data tasks quick and private.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card feature-card-dark">
+            <span class="feature-number">01</span>
+            <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></svg></div>
+            <h3>Readable in one click</h3>
+            <p>Turn dense payloads into consistently indented, 2-space JSON built for scanning and debugging.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <div class="feature-icon amber"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <h3>Private by design</h3>
+            <p>Your JSON stays on your device. There is no server, account, database, or analytics pipeline involved.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <div class="feature-icon blue"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 3-5 5 5 5M16 3l5 5-5 5M8 21h8"/></svg></div>
+            <h3>Clean, useful errors</h3>
+            <p>Find malformed data faster with the exact line, column, and nearby code highlighted after a parse error.</p>
+          </article>
+        </div>
+
+        <div class="comparison-wrap">
+          <div class="comparison-copy">
+            <p class="section-kicker">Built for confidence</p>
+            <h3>A safer way to inspect JSON</h3>
+            <p>Skip tools that send sensitive API payloads to unknown servers.</p>
+          </div>
+          <div class="comparison-table" role="table" aria-label="JSON Forge benefit comparison">
+            <div class="table-row table-head" role="row"><span role="columnheader">Capability</span><span role="columnheader">JSON Forge</span><span role="columnheader">Typical tools</span></div>
+            <div class="table-row" role="row"><span role="cell">Runs fully in-browser</span><strong role="cell">Yes</strong><span role="cell">Sometimes</span></div>
+            <div class="table-row" role="row"><span role="cell">No sign-up or limits</span><strong role="cell">Yes</strong><span role="cell">Varies</span></div>
+            <div class="table-row" role="row"><span role="cell">Clear error locations</span><strong role="cell">Yes</strong><span role="cell">Basic</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="how-section" id="how-it-works" aria-labelledby="how-title">
+        <div class="how-shell">
+          <div class="section-intro align-left">
+            <p class="section-kicker light">Simple by design</p>
+            <h2 id="how-title">From raw payload to clean JSON in three steps</h2>
+          </div>
+          <ol class="steps">
+            <li><span>1</span><div><h3>Paste or upload</h3><p>Drop in raw JSON or select a local <code>.json</code> file.</p></div></li>
+            <li><span>2</span><div><h3>Choose an action</h3><p>Format, minify, or validate without changing your source unexpectedly.</p></div></li>
+            <li><span>3</span><div><h3>Use the result</h3><p>Copy clean output or download it as a ready-to-use JSON file.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <aside class="ad-break" data-adviverse-unit="secondary" aria-label="Advertisement" hidden>
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-slot ad-slot-rectangle" data-adviverse-slot></div>
+      </aside>
+
+      <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+        <div class="section-intro">
+          <p class="section-kicker">Frequently asked</p>
+          <h2 id="faq-title">JSON formatter questions, answered</h2>
+        </div>
+        <div class="faq-list">
+          <details open><summary>Is this JSON formatter really free?<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Yes. JSON Forge is free to use, with no account, usage limit, or paid tier required.</p></details>
+          <details><summary>Is my JSON data sent to a server?<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>No. Formatting, minification, validation, upload reading, and downloads all happen locally in your browser.</p></details>
+          <details><summary>What makes JSON invalid?<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Common problems include trailing commas, single-quoted strings, unquoted property names, comments, and mismatched braces or brackets.</p></details>
+          <details><summary>Can I format large JSON files?<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Yes. The tool avoids expensive highlighting for very large output while preserving formatting, validation, copying, and downloading.</p></details>
+        </div>
+        <div class="bottom-cta">
+          <div><p class="section-kicker light">No sign-up. No uploads.</p><h2>Make your JSON readable.</h2></div>
+          <a class="button button-light" href="#formatter">Format JSON free<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 14 0M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </section>
+
+      <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div>
+          <p class="section-kicker">Privacy</p>
+          <h2 id="privacy-title">Your JSON stays private</h2>
+        </div>
+        <div class="privacy-copy">
+          <p>JSON Forge processes all JSON input on your device. The contents you paste, upload, format, validate, or download are never sent to JSON Forge or Adviverse.</p>
+          <p>If you allow advertising, Adviverse's ad technology may process technical information such as your IP address, browser or device details, page URL, consent signals, and ad interactions to deliver and measure ads and prevent fraud. It may use cookies or similar storage. If you decline, the Adviverse script is not loaded.</p>
+          <p>You can change your choice at any time. See the <a href="https://adviverse.com/en/privacy" target="_blank" rel="noopener noreferrer">Adviverse Privacy Policy</a> and <a href="https://adviverse.com/en/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a> for more information.</p>
+          <button class="text-button" id="privacyChoicesBtn" type="button">Manage advertising choices</button>
+          <small>Last updated: July 22, 2026</small>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-shell">
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">{ }</span><span>JSON<span>Forge</span></span></a>
+        <p>Fast, private JSON tools for developers.</p>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="#privacy">Privacy</a><a href="#faq">FAQ</a></nav>
+        <p>&copy; <span id="year"></span> JSON Forge. Built to run locally.</p>
+      </div>
+    </footer>
+
+    <section class="consent-banner" id="consentBanner" aria-labelledby="consent-title" role="dialog" aria-modal="false" hidden>
+      <div class="consent-copy">
+        <strong id="consent-title">Support JSON Forge with ads</strong>
+        <p>We use Adviverse to fund this free tool. If you allow ads, its technology may use device data and cookies for delivery, measurement, and fraud prevention. Your JSON content is never shared.</p>
+        <a href="#privacy">Read privacy details</a>
+      </div>
+      <div class="consent-actions">
+        <button class="button button-secondary" id="declineAdsBtn" type="button">Decline</button>
+        <button class="button button-primary" id="acceptAdsBtn" type="button">Allow ads</button>
+      </div>
+    </section>
+  </body>
+</html>
