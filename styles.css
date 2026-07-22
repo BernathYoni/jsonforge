@@ -180,12 +180,10 @@ kbd { padding: 1px 5px; border: 1px solid var(--border-strong); border-bottom-wi
 
 .ad-break { width: min(calc(100% - 40px), var(--max-width)); min-height: 282px; margin: 0 auto 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .ad-break[hidden] { display: none; }
-.ad-break.ad-wide { min-height: 122px; }
 .ad-label { margin-bottom: 7px; color: var(--ink-soft); font-size: 9px; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
 .ad-slot { position: relative; display: grid; place-items: center; max-width: 100%; overflow: hidden; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface-soft) 55%, var(--surface)); }
 .ad-slot::before { content: "Sponsored"; position: absolute; z-index: 0; color: var(--border-strong); font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
 .ad-slot > * { position: relative; z-index: 1; }
-.ad-slot-wide { width: 728px; height: 90px; }
 .ad-slot-rectangle { width: 300px; height: 250px; }
 
 .section { width: min(calc(100% - 40px), var(--max-width)); margin: 0 auto; padding: 15px 0 115px; }

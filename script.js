@@ -10,7 +10,7 @@ const SAMPLE_JSON = `{
 const ADVIVERSE_CONFIG = Object.freeze({
   endpoint: "https://serve.adviverse.com",
   placements: {
-    primary: "tk_df66d1e4518d40e0c0", // 728x90 display placement.
+    primary: "tk_df66d1e4518d40e0c0", // 300x250 display placement.
     secondary: "tk_9e7a90e8e97e92c113", // 300x250 display placement.
   },
 });
