@@ -10,8 +10,8 @@ const SAMPLE_JSON = `{
 const ADVIVERSE_CONFIG = Object.freeze({
   endpoint: "https://serve.adviverse.com",
   placements: {
-    primary: "", // Create a 728x90 display placement.
-    secondary: "", // Create a 300x250 display placement.
+    primary: "tk_df66d1e4518d40e0c0", // 728x90 display placement.
+    secondary: "tk_9e7a90e8e97e92c113", // 300x250 display placement.
   },
 });
 
@@ -306,14 +306,12 @@ function enableAdviverseAds() {
   window.jsonForgeConsent = { adsAllowed: true };
   document.documentElement.dataset.adsLoaded = "true";
 
-  units.forEach((unit, index) => {
+  units.forEach((unit) => {
     const placementKey = ADVIVERSE_CONFIG.placements[unit.dataset.adviverseUnit];
     const marker = document.createElement("script");
     marker.dataset.tag = placementKey;
-    if (index === 0) {
-      marker.async = true;
-      marker.src = `${ADVIVERSE_CONFIG.endpoint.replace(/\/$/, "")}/sdk.js`;
-    }
+    marker.async = true;
+    marker.src = `${ADVIVERSE_CONFIG.endpoint.replace(/\/$/, "")}/sdk.js`;
     unit.querySelector("[data-adviverse-slot]").append(marker);
     unit.hidden = false;
   });
